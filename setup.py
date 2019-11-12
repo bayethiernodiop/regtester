@@ -12,12 +12,17 @@ setuptools.setup(
     name='regtester',
     license="MIT",
     description='RegEx Tester is a module to build unit test of regex in python',
-    version='v0.4',
+    version='v0.7',
     long_description=README,
     url='https://github.com/bayethiernodiop/regtester',
     packages=setuptools.find_packages(),
     python_requires=">=3.7",
     install_requires=["regex==2019.11.1","colorama==0.4.1"],
+    entry_points ={ 
+            'console_scripts': [ 
+                'regtester = regtester.RegExTester:main'
+            ] 
+        }, 
     classifiers=[
         # Trove classifiers
         # (https://pypi.python.org/pypi?%3Aaction=list_classifiers)

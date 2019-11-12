@@ -100,11 +100,10 @@ class RegExTester:
         test_failed = sum([test_response.failure_count for test_response in results])
         self.info(f"Total tests : {all_test}, Successes  {test_passed}, Failures :  {test_failed}")
         deinit()
-
-def main():
+if __name__=="__main__":
     parser = argparse.ArgumentParser(description = "A RegEx Tester") 
-    parser.add_argument("test_path", metavar = "path", type = str,  
+    parser.add_argument("test_path", nargs = '1', metavar = "path", type = str,  
                      help = "the path is used toe xecute tests, it can be a folder containing a __init__.py file or a file")
     args = parser.parse_args() 
     if(args.test_path):
-        RegExTester(args.test_path)
+        regex_tester = RegExTester(args.test_path)
