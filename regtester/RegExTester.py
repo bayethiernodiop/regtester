@@ -24,6 +24,7 @@ class RegExTester:
             class_name = path.replace(".py","")
             module = importlib.import_module(class_name)
             class_instance =  getattr(module, class_name)()
+            assert isinstance(class_instance, RegExTest), f"The class {class_name} doesn't herit the base class RegExTest"
             self.tests.append(class_instance)
         elif(os.path.isdir(path)):
             sys.path.append(path)
@@ -32,6 +33,7 @@ class RegExTester:
                     class_name = filename.replace(".py","")
                     class_module = eval(f"importlib.import_module('{class_name}')")
                     class_instance =  getattr(class_module, class_name)()
+                    assert isinstance(class_instance, RegExTest), f"The class {class_name} doesn't herit the base class RegExTest"
                     self.tests.append(class_instance)
             self.info(f"{len(self.tests)} Test classes were found")
         else:
@@ -103,8 +105,12 @@ class RegExTester:
 
 def main():
     parser = argparse.ArgumentParser(description = "A RegEx Tester") 
-    parser.add_argument("test_path", metavar = "path", type = str,  
+    parser.add_argument("test_path", metavar = "test_path", type = str,  
                      help = "the path is used toe xecute tests, it can be a folder containing a __init__.py file or a file")
     args = parser.parse_args() 
-    if(args.test_path):
-        RegExTester(args.test_path)
+    RegExTester(args.test_path)
+
+def test():
+    RegExTester("regtester/test_samples")
+if __name__ == "__main__":
+    test()

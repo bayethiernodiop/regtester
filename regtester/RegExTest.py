@@ -3,7 +3,7 @@ from typing import List
 from regtester.RegExTestItem import RegExTestItem
 import regex
 import re
-from re import RegexFlag
+from re import RegexFlag    
 from typing import Pattern
 
 class RegExTest(abc.ABC):
@@ -33,5 +33,3 @@ class RegExTest(abc.ABC):
     def exec_regex(self, regex:Pattern, text:str)-> any:
         pass
 
-if __name__ == "__main__":
-    x=RegExTest()
