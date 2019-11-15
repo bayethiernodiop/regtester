@@ -111,6 +111,8 @@ def main():
     RegExTester(args.test_path)
 
 def test():
-    RegExTester("regtester/test_samples")
+    from pathlib import Path
+    print()
+    RegExTester(f"{str(Path(__file__).parent)}/test_samples")
 if __name__ == "__main__":
     test()

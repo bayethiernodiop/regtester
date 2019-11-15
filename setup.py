@@ -12,7 +12,7 @@ setuptools.setup(
     name='regtester',
     license="MIT",
     description='RegEx Tester is a module to build unit test of regex in python',
-    version='v1.0',
+    version='v1.1',
     long_description=README,
     url='https://github.com/bayethiernodiop/regtester',
     packages=setuptools.find_packages(),
