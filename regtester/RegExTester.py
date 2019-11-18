@@ -9,6 +9,7 @@ import importlib
 from typing import List
 from colorama import init, deinit
 from colorama import Fore, Back, Style
+from pathlib import Path
 class RegExTester:
 
     def __init__(self,path:str):
@@ -21,8 +22,9 @@ class RegExTester:
     def find_regex_tests(self,path:str) -> List[RegExTest]:
         # folder with the tests classes has to contain a __init__.py file
         if(os.path.isfile(path)):
-            class_name = path.replace(".py","")
-            module = importlib.import_module(class_name)
+            sys.path.append(str(Path(path).parent.resolve()))
+            class_name = path.split("/")[-1].replace(".py","")
+            module = eval(f"importlib.import_module('{class_name}')")
             class_instance =  getattr(module, class_name)()
             assert isinstance(class_instance, RegExTest), f"The class {class_name} doesn't herit the base class RegExTest"
             self.tests.append(class_instance)
@@ -111,8 +113,6 @@ def main():
     RegExTester(args.test_path)
 
 def test():
-    from pathlib import Path
-    print()
     RegExTester(f"{str(Path(__file__).parent)}/test_samples")
 if __name__ == "__main__":
     test()
